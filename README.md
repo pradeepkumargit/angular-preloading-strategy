@@ -1,4 +1,11 @@
-# AngularPreloadingStrategy
+# Angular Preloading Strategy
+This is demo project for Preloading Strategy in Angular 8.
+Angular Preloading Strategy is yet another way to speed up the load time of the Angular Apps. 
+We build Modular apps using the Angular Modules. The Angular loads all the modules, when the user requests for the first time. This will make app loading slowly as it need to download all the modules. We can solve this problem by lazy loading those modules. 
+The Angular allows us further optimize our app using a technique called PreLoading.
+I have build a custom Preloading strategy so as to fully control what gets lazy loaded and what gets Preloaded.
+
+Applies to: Angular 2, Angular 4, Angular 5, Angular 6, Angular 7, Angular 8. Angular 9
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
 
