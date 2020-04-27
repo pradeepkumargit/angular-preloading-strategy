@@ -6,22 +6,24 @@ import { flatMap } from 'rxjs/operators'
 import { PreloadingStrategy, Route } from '@angular/router';
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class CustomPreloadingStrategy implements PreloadingStrategy {
 
-    preload(route: Route, loadMe: () => Observable<any>): Observable<any> {
-    
-    if (route.data && route.data['preload']) {
-      var delay:number=route.data['delay']
-      console.log('preload called on '+route.path+' with a delay of '+delay);
-      return timer(delay).pipe(
-        flatMap( _ => { 
-          console.log("Loading now "+ route.path+' module');
-          return loadMe() ;
-        }));
-    } else {
-      console.log('no preload for the path '+ route.path);
-      return of(null);
+    preloadedModules: string[] = [];
+
+    preload(route: Route, load: () => Observable<any>): Observable<any> {
+        if (route.data && route.data['preload']) {
+            // add the route path to the preloaded module array
+            this.preloadedModules.push(route.path);
+
+            // log the route path to the console
+            console.log('Preloaded: ' + route.path);
+
+            return load();
+        } else {
+            return of(null);
+        }
     }
-  }
 }
