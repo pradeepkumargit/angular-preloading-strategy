@@ -4,8 +4,16 @@ import { CustomPreloadingStrategy } from './custom-preloading-strategy.service';
  
  
 const routes: Routes = [
-  {path: "admin", loadChildren:'./admin/admin.module#AdminModule',data: { preload: true, delay:5000 }},
-  {path: "test", loadChildren:'./test/test.module#TestModule',data: { preload: true, delay:10000 }},
+    {
+        path: "admin",
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+        data: { preload: true, delay: 5000 }
+    },
+    { 
+        path: "test", 
+        loadChildren: () => import('./test/test.module').then(m => m.TestModule), 
+        data: { preload: true, delay: 10000 } 
+    },
 ];
  
  
